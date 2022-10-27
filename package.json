@@ -1,0 +1,29 @@
+{
+  "name": "tweet_storm",
+  "version": "1.0.0",
+  "description": "programa cuja funcao e burlar a limitacao de caracteres do twitter, quebrando um texto grande em varios para que possa ser postado em blocos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SrNascimento40/tweet-storm.git"
+  },
+  "keywords": [
+    "twitter",
+    "typescript"
+  ],
+  "author": "Wallace Nascimento",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SrNascimento40/tweet-storm/issues"
+  },
+  "homepage": "https://github.com/SrNascimento40/tweet-storm#readme",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
