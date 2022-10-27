@@ -3,22 +3,22 @@ function tweetStorm(text: string) {
     text = text.trim()
     //mede quantidade de caracteres
     var caracteresQuantidade = text.length
-    //vai armazenar cada bloco de tweet
+    //vai armazenar cada página de tweet
     var pages: Array<string> = [];
 
     if (caracteresQuantidade === 0) {
         //Se não houver texto, não haverá nada para tratar
-        console.log("Nenhum texto para tratar");
+        console.log("Nenhum texto para tratar.");
 
     } else if (caracteresQuantidade <= 139) {
-        //Se o texto tiver menos ou exatamente 140 caracteres, ele já pode ser postado em um único bloco
+        //Se o texto tiver menos ou exatamente 140 caracteres, ele já pode ser postado em uma única página
         pages.push((text).trim())
         console.log("seu texto pode ser publicado em 1 tweet:\n\n" + pages[0]);
 
     } else {
         //caso o texto tenha mais que 140 caracteres
         for (let index = 0; caracteresQuantidade > 139; index++) {
-            //se o primeiro caractere depois dos 140 for ' ' o bloco deve encerrar no 140º caractere
+            //se o primeiro caractere depois dos 140 for ' ', a página deve encerrar no 140º caractere
             if (text.lastIndexOf(' ') == 140) {
                 //faz o recorte do que será postado
                 const recorte = text.slice(0, 139)
@@ -26,7 +26,7 @@ function tweetStorm(text: string) {
                 pages.push(recorte)
                 //tira do texto total o que já foi tratado
                 text = (text.slice(140, text.length)).trim()
-                //atualiza caracteres com o restante do que sobrou do texto
+                //atualiza quantidade de caracteres com o restante do que sobrou do texto
                 caracteresQuantidade = text.length
 
             } else {
@@ -40,31 +40,31 @@ function tweetStorm(text: string) {
                 pages.push(recorte)
                 //tira do texto total o que já foi tratado
                 text = (text.slice(posUltimaPalavra)).trim()
-                //atualiza caracteres com o restante do que sobrou do texto
+                //atualiza quantidade de caracteres com o restante do que sobrou do texto
                 caracteresQuantidade = text.length
             }
-            //se sobrar algo cai aqui para adicionar a última página
+            //se faltar algo, será adicionado a última página
         } if (caracteresQuantidade != 0) {
             pages.push(text)
         }
-        console.log("No total haverão " + pages.length + " páginas para postar:\n");
+        console.log("O texto acima não cabe em um tweet, ele precisa ser quebrado em " + pages.length + " páginas para postar:\n");
         for (let i = 0; i < pages.length; i++) {
-            console.log('parte ' + (i+1) + ':\n' + pages[i] + '\n');
+            console.log(pages[i] + ' ' + (i+1) + '/' + pages.length + '\n');
         }
     }
 }
 
-//TESTS
+//TESTES
 
-//nothing
+//nada
 tweetStorm("")
 console.log("\n\n");
 
-//Little test
+//Pequeno teste
 tweetStorm("Lorem ipsum dolor sit amet...")
 console.log("\n\n");
 
-//space before and after
+//espaço antes e depois
 tweetStorm("                                                                                           Lorem ipsum                                                                                                     ")
 console.log("\n\n");
 
