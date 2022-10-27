@@ -4,6 +4,7 @@
   "description": "programa cuja funcao e burlar a limitacao de caracteres do twitter, quebrando um texto grande em varios para que possa ser postado em blocos.",
   "main": "index.js",
   "scripts": {
+    "dev": "ts-node",
     "test": "test"
   },
   "repository": {
