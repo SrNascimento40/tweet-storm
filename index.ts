@@ -1,19 +1,23 @@
-function tweetStorm(text: string) {
+export function tweetStorm(text: string) {
     //espaçamentos antes e depois devem ser ignorados
     text = text.trim()
     //mede quantidade de caracteres
     var caracteresQuantidade = text.length
     //vai armazenar cada página de tweet
     var pages: Array<string> = [];
+    //pages com paginação
+    var pagesPaginacao: Array<string> = [];
 
     if (caracteresQuantidade === 0) {
         //Se não houver texto, não haverá nada para tratar
         console.log("Nenhum texto para tratar.");
+        return "Nenhum texto para tratar."
 
     } else if (caracteresQuantidade <= 139) {
         //Se o texto tiver menos ou exatamente 140 caracteres, ele já pode ser postado em uma única página
         pages.push((text).trim())
         console.log("seu texto pode ser publicado em 1 tweet:\n\n" + pages[0]);
+        return pages[0]
 
     } else {
         //caso o texto tenha mais que 140 caracteres
@@ -22,7 +26,7 @@ function tweetStorm(text: string) {
             if (text.lastIndexOf(' ') == 140) {
                 //faz o recorte do que será postado
                 const recorte = text.slice(0, 139)
-                //adiciona ao grupo dos tweetStorms
+                //adiciona ao grupo de tweetStorm
                 pages.push(recorte)
                 //tira do texto total o que já foi tratado
                 text = (text.slice(140, text.length)).trim()
@@ -49,25 +53,12 @@ function tweetStorm(text: string) {
         }
         console.log("O texto acima não cabe em um tweet, ele precisa ser quebrado em " + pages.length + " páginas para postar:\n");
         for (let i = 0; i < pages.length; i++) {
+            pagesPaginacao.push(pages[i] + ' ' + (i+1) + '/' + pages.length);
             console.log(pages[i] + ' ' + (i+1) + '/' + pages.length + '\n');
         }
+        return pagesPaginacao
     }
 }
 
-//TESTES
-
-//nada
-tweetStorm("")
-console.log("\n\n");
-
-//Pequeno teste
-tweetStorm("Lorem ipsum dolor sit amet...")
-console.log("\n\n");
-
-//espaço antes e depois
-tweetStorm("                                                                                           Lorem ipsum                                                                                                     ")
-console.log("\n\n");
-
-// big test
-tweetStorm("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce condimentum lacinia pulvinar. Integer finibus mollis felis et egestas. Etiam consequat nisi at lorem maximus, quis blandit dui scelerisque. Quisque nec enim est. Nam bibendum ultricies mi, id posuere felis volutpat laoreet. Ut egestas pulvinar risus. Nam egestas nunc vitae lobortis consequat. Etiam egestas ligula at sodales tincidunt. Phasellus tortor nibh, euismod et suscipit ut, sodales eget lectus. Proin dignissim interdum ex, sed luctus eros ullamcorper ut. Sed tincidunt risus quis lectus finibus, ut suscipit risus feugiat. Mauris commodo, libero in porta aliquet, eros tellus pulvinar magna, sed blandit arcu ex vitae eros. Ut maximus a mauris id semper.\nNulla tincidunt justo at congue aliquam. Etiam condimentum, ligula venenatis suscipit tincidunt, massa ante venenatis lacus, sit amet eleifend sapien dui porta justo. Duis egestas elementum turpis eget vulputate. Duis placerat vestibulum purus, eget elementum ligula sollicitudin sit amet. Suspendisse varius orci sit amet enim cursus, eu cursus sapien consequat. Maecenas congue velit sem, maximus porttitor nibh placerat in. Duis eget diam nisi.")
-console.log("\n\n");
+const texto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et lorem eros. Phasellus arcu justo, scelerisque eu maximus eu, rhoncus in lorem. Donec lacus leo, consectetur semper ullamcorper efficitur.";
+    console.log(tweetStorm(texto));
